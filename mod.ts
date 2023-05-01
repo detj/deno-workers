@@ -11,7 +11,9 @@ function log(...args: unknown[]) {
 }
 
 for (let i = 0; i < count; ++i) {
-  const worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module" });
+  const worker = new Worker(new URL("./worker.ts", import.meta.url), {
+    type: "module",
+  });
 
   worker.addEventListener("message", () => {
     doneCount = doneCount + 1;
@@ -25,6 +27,6 @@ for (let i = 0; i < count; ++i) {
 }
 
 function terminate() {
-  workers.forEach(worker => worker.terminate());
+  workers.forEach((worker) => worker.terminate());
   log(`final value`, typedArray[0]);
 }
