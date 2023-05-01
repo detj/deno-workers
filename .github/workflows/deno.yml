@@ -10,10 +10,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v3
-    - uses: denoland/setup-deno@v1
+    - name: Use deno v1.x on ${{ matrix.os }}
+      uses: denoland/setup-deno@v1
       with:
         deno-version: v1.x
     - run: deno lint
